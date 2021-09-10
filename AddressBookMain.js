@@ -1,33 +1,47 @@
 let AddressBook = require('./AddressBook.js');
 let Person = require('./Person.js');
 
-let book = new AddressBook();
-let contact = new Person();
 
-const prompt = require('prompt-sync')();
-let firstName = prompt('Enter First Name : ');
-contact.firstName = firstName;
+try{
+    let book = new AddressBook();
+    let contact = new Person();
 
-let lastName = prompt('Enter Last Name : ');
-contact.lastName = lastName;
+    const prompt = require('prompt-sync')();
+    let firstName = prompt('Enter First Name : ');
+    contact.validateName(firstName);
+    contact.firstName = firstName;
 
-let address = prompt('Enter Address : ');
-contact.address = address;
+    let lastName = prompt('Enter Last Name : ');
+    contact.validateName(lastName);
+    contact.lastName = lastName;
 
-let city = prompt('Enter City : ');
-contact.city = city;
+    let address = prompt('Enter Address : ');
+    contact.validateAddress(address);
+    contact.address = address;
 
-let state = prompt('Enter State : ');
-contact.state = state;
+    let city = prompt('Enter City : ');
+    contact.validateAddress(city);
+    contact.city = city;
 
-let zip = prompt('Enter Zip : ');
-contact.zip = zip;
+    let state = prompt('Enter State : ');
+    contact.validateAddress(state);
+    contact.state = state;
 
-let phoneNo = prompt('Enter Phone Nmuber : ');
-contact.phoneNo = phoneNo;
+    let zip = prompt('Enter Zip : ');
+    contact.validateZip(zip)
+    contact.zip = zip;
 
-let email = prompt('Enter E-Mail : ');
-contact.email = email;
+    let phoneNo = prompt('Enter Phone Nmuber : ');
+    contact.validatePhoneNo(phoneNo);
+    contact.phoneNo = phoneNo;
 
-book.addPerson(contact);
-console.log(book.contactArr);
+    let email = prompt('Enter E-Mail : ');
+    contact.validateEmail(email)
+    contact.email = email;
+
+    book.addPerson(contact);
+    console.log(book.contactArr);
+
+}catch(err) {
+    console.log(err);
+}
