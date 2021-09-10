@@ -73,12 +73,45 @@ function readContact(){
             console.log(err);
         }
         const prompt = require('prompt-sync')();
-        continueFlag = prompt('\nDo you want to continue? Press 1 :');
+        continueFlag = prompt('Do you want to add new contact? Press 1 :');
 
     }while(continueFlag == 1);
 }
+
+function editContact(){
+
+    const prompt = require('prompt-sync')();
+    let addrName = prompt('Enter name of Address Book :');
+    
+    for(const book of addrArr){
+        if(book.addrName == null){
+            console.log("Couldn't find the Address Book..");
+        }
+        else{
+            let flag = 1;
+            let editName = prompt('Enter the first name of person :');
+            for(const contact of book.contactArr){
+                if(contact.firstName == editName){
+                    let newAddress = prompt('Enter the new Address :');
+                    contact.address = newAddress;
+                    console.log("Contact Updated ...");
+                }
+                else{
+                    console.log("Couldn't find the Person..");
+                }
+            }
+        }
+    }
+}
+
 readContact();
 showAddressBook();
+const prompt = require('prompt-sync')();
+let editOption = prompt("Do you want to edit? press Y / N : ");
+if(editOption == 'Y'){
+    editContact();
+    showAddressBook();
+}
 
 
     
