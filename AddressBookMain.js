@@ -2,56 +2,52 @@ let AddressBook = require('./AddressBook.js');
 let Person = require('./Person.js');
 let addrArr = new Array();
 
-function readContact(){
-    let continueFlag;
-    do {
-        try{
-            let contact = new Person();
-        
-            const prompt = require('prompt-sync')();
-            let addrName = prompt('\nIn which Address Book you want to add your contact?');
-        
-            let firstName = prompt('Enter First Name : ');
-            contact.validateName(firstName);
-            contact.firstName = firstName;
-        
-            let lastName = prompt('Enter Last Name : ');
-            contact.validateName(lastName);
-            contact.lastName = lastName;
-        
-            let address = prompt('Enter Address : ');
-            contact.validateAddress(address);
-            contact.address = address;
-        
-            // let city = prompt('Enter City : ');
-            // contact.validateAddress(city);
-            // contact.city = city;
-        
-            // let state = prompt('Enter State : ');
-            // contact.validateAddress(state);
-            // contact.state = state;
-        
-            // let zip = prompt('Enter Zip : ');
-            // contact.validateZip(zip)
-            // contact.zip = zip;
-        
-            // let phoneNo = prompt('Enter Phone Nmuber : ');
-            // contact.validatePhoneNo(phoneNo);
-            // contact.phoneNo = phoneNo;
-        
-            // let email = prompt('Enter E-Mail : ');
-            // contact.validateEmail(email)
-            // contact.email = email;
-        
-            addInAddrBook(contact,addrName);
-            
-        }catch(err) {
-            console.log(err);
-        }
-        const prompt = require('prompt-sync')();
-        continueFlag = prompt('Do you want to add new contact? Press 1 :');
+function addContact(){
+    
 
-    }while(continueFlag == 1);
+    try{
+        let contact = new Person();
+    
+        const prompt = require('prompt-sync')();
+        let addrName = prompt('\nIn which Address Book you want to add your contact?');
+    
+        let firstName = prompt('Enter First Name : ');
+        contact.validateName(firstName);
+        contact.firstName = firstName;
+    
+        let lastName = prompt('Enter Last Name : ');
+        contact.validateName(lastName);
+        contact.lastName = lastName;
+    
+        let address = prompt('Enter Address : ');
+        contact.validateAddress(address);
+        contact.address = address;
+    
+        // let city = prompt('Enter City : ');
+        // contact.validateAddress(city);
+        // contact.city = city;
+    
+        // let state = prompt('Enter State : ');
+        // contact.validateAddress(state);
+        // contact.state = state;
+    
+        // let zip = prompt('Enter Zip : ');
+        // contact.validateZip(zip)
+        // contact.zip = zip;
+    
+        // let phoneNo = prompt('Enter Phone Nmuber : ');
+        // contact.validatePhoneNo(phoneNo);
+        // contact.phoneNo = phoneNo;
+    
+        // let email = prompt('Enter E-Mail : ');
+        // contact.validateEmail(email)
+        // contact.email = email;
+    
+        addInAddrBook(contact,addrName);
+        
+    }catch(err) {
+        console.log(err);
+    }
 }
 
 function addInAddrBook(contact,addrName){
@@ -139,22 +135,58 @@ function deleteContact(){
     }    
 }
 
-readContact();
-showAddressBook();
-const prompt = require('prompt-sync')();
+function contactsCount(){
 
-let editOption = prompt("Do you want to edit? press Y / N : ");
-if(editOption == 'Y'){
-    editContact();
-    showAddressBook();
+    const prompt = require('prompt-sync')();
+    let addrName = prompt('Enter name of Address Book :');
+    let count = 0;
+    for(const book of addrArr){
+        if(book.addrName == null){
+            console.log("Couldn't find the Address Book..");
+        }
+        else{
+            count = book.contactArr.length;
+            console.log('Count of Contacts in the Address Book : ' + count);
+        }
+    }
 }
 
-let delOption = prompt("Do you want to delete? press Y / N : ");
-if(delOption == 'Y'){
-    deleteContact();
-    showAddressBook();
+function showMenu(){
+
+    let continueFlag;
+    do{
+        const prompt = require('prompt-sync')();
+        console.log("\n---------------------------");
+        console.log("\n### Address Book Menu ###");
+        console.log("\n---------------------------");
+        console.log("\n1.Add Contact \n2.Display Address Book \n3.Edit Contact \n4.Delete Contact \n5.Count of contacts");
+        
+        let option = prompt("\nChoose your option : ");
+	    
+        switch(option){
+            case "1" :
+                addContact();
+                break;
+            case "2" :
+                showAddressBook();
+                break;
+            case "3" :
+                editContact();
+                break; 
+            case "4" :
+                deleteContact();
+                break; 
+            case "5" :
+                contactsCount();
+                break;   
+            default :
+                console.log("\nInvalid option");
+        }
+        
+        continueFlag = prompt('Do you want to continue? Press 1 :');
+
+    }while(continueFlag == 1);
+
+    console.log("\nThank you for using Address Book System !!");
 }
-
-
-    
-    
+showMenu();
