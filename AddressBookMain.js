@@ -189,7 +189,7 @@ function searchPerson(){
               }).map(function (contact) {
                 return contact;
               });
-              console.log(person);
+              console.log("Count : " + person.length);
         }
     }
 }
