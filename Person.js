@@ -60,7 +60,7 @@ module.exports = class Person{
 	}
     validateEmail(email) {
 		
-		let emailRegex = RegExp('^(.+)@bl.co(.+)$');
+		let emailRegex = RegExp('^(.+)@gmail(.+)$');
 		if(!emailRegex.test(email)) {
 			throw 'Invalid Mobile number';
 		}

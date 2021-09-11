@@ -174,6 +174,7 @@ function contactsCount(){
         }
     }
 }
+
 function searchPerson(){
 
     const prompt = require('prompt-sync')();
@@ -186,12 +187,13 @@ function searchPerson(){
             let person = book.contactArr.filter(function (contact) {
                 return contact.city === 'Calicut';
               }).map(function (contact) {
-                return contact.firstName;
+                return contact;
               });
               console.log(person);
         }
     }
 }
+
 function showMenu(){
 
     let continueFlag;
