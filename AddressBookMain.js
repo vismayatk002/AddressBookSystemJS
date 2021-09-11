@@ -174,7 +174,24 @@ function contactsCount(){
         }
     }
 }
+function searchPerson(){
 
+    const prompt = require('prompt-sync')();
+    let addrName = prompt('Enter name of Address Book :');
+    for(const book of addrArr){
+        if(book.addrName == null){
+            console.log("Couldn't find the Address Book..");
+        }
+        else{
+            let person = book.contactArr.filter(function (contact) {
+                return contact.city === 'Calicut';
+              }).map(function (contact) {
+                return contact.firstName;
+              });
+              console.log(person);
+        }
+    }
+}
 function showMenu(){
 
     let continueFlag;
@@ -183,7 +200,7 @@ function showMenu(){
         console.log("\n---------------------------");
         console.log("\n### Address Book Menu ###");
         console.log("\n---------------------------");
-        console.log("\n1.Add Contact \n2.Display Address Book \n3.Edit Contact \n4.Delete Contact \n5.Count of contacts");
+        console.log("\n1.Add Contact \n2.Display Address Book \n3.Edit Contact \n4.Delete Contact \n5.Count of Contacts \n6.Search person by City");
         
         let option = prompt("\nChoose your option : ");
 	    
@@ -202,6 +219,9 @@ function showMenu(){
                 break; 
             case "5" :
                 contactsCount();
+                break;
+            case "6" :
+                searchPerson();
                 break;   
             default :
                 console.log("\nInvalid option");
