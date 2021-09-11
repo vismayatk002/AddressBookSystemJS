@@ -194,6 +194,36 @@ function searchPerson(){
     }
 }
 
+function comparePersons(object1, object2, key) {
+    const obj1 = object1[key].toUpperCase()
+    const obj2 = object2[key].toUpperCase()
+  
+    if (obj1 < obj2) {
+      return -1
+    }
+    if (obj1 > obj2) {
+      return 1
+    }
+    return 0
+}
+
+function sortByName(){
+
+    const prompt = require('prompt-sync')();
+    let addrName = prompt('Enter name of Address Book :');
+    for(const book of addrArr){
+        if(book.addrName == null){
+            console.log("Couldn't find the Address Book..");
+        }
+        else{
+            book.contactArr.sort((contact1,contact2) => {
+                return comparePersons(contact1,contact2,'firstName')
+              })
+        }
+    }
+    console.log("Sorted !");
+}
+
 function showMenu(){
 
     let continueFlag;
@@ -202,7 +232,7 @@ function showMenu(){
         console.log("\n---------------------------");
         console.log("\n### Address Book Menu ###");
         console.log("\n---------------------------");
-        console.log("\n1.Add Contact \n2.Display Address Book \n3.Edit Contact \n4.Delete Contact \n5.Count of Contacts \n6.Search person by City");
+        console.log("\n1.Add Contact \n2.Display Address Book \n3.Edit Contact \n4.Delete Contact \n5.Count of Contacts \n6.Search person by City \n7.Sort persons by name");
         
         let option = prompt("\nChoose your option : ");
 	    
@@ -224,7 +254,10 @@ function showMenu(){
                 break;
             case "6" :
                 searchPerson();
-                break;   
+                break;  
+            case "7" :
+                sortByName();
+            break;   
             default :
                 console.log("\nInvalid option");
         }
